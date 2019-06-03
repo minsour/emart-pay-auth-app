@@ -1,16 +1,30 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
-import LoginNavigatore from './LoginNavigatore';
+import LoginNavigator from './LoginNavigator';
+import AuthScreen from '../screens/AuthScreen';
 
-export default createAppContainer(createSwitchNavigator({
+const InitialNavigator = createSwitchNavigator({
+  // You could add another route here for authentication.
+  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+  Login: LoginNavigator,
+  Main: MainTabNavigator,
+});
+
+const QrPayNavigator = createStackNavigator({
+  // You could add another route here for authentication.
+  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+  Auth: AuthScreen
+});
+
+export default createAppContainer(createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-    Login: LoginNavigatore,
-    Main: MainTabNavigator,
+    Initial: InitialNavigator,
+    QrPay: QrPayNavigator
   },
   {
-    headerMode: "none"
+    headerMode: 'none'
   })
 );

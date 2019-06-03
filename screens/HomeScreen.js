@@ -60,6 +60,7 @@ export default class HomeScreen extends React.Component {
             </Button>
             <Button style={{ marginRight: 10 }} onPress={() => {
               this.props.clickEventStore.auth=false;
+              this.props.navigation.navigate('Auth');
             }}>
               <Text>확인</Text>
             </Button>
