@@ -1,5 +1,6 @@
-import { SIGN_IN, SIGN_UP,  } from '../constants/apiUrl';
+import { SIGN_IN, SIGN_UP, AUTH_ADULT,  } from '../constants/apiUrl';
 import { GET, POST } from '../constants/apiMethod';
+import { Platform } from 'expo-core';
 
 const publicAPI = (method, url, body) => {
   if (method === GET) {
@@ -10,12 +11,68 @@ const publicAPI = (method, url, body) => {
       method: method,
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
     }).then((response) => response.json())
   }
 }
+
+const privateAPI = (token, method, url, body) => {
+  if (method === GET) {
+    return fetch(url, { 
+      method: method,
+      headers: {
+        'Content-type': 'multipart/form-data',
+        'Authorization': token
+      } 
+    }).then((response) => response.json())
+  }
+  else {
+    return fetch(url, {
+      method: method,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': token
+      },
+      body: body
+    }).then((response) => response.json())
+  }
+}
+
+export const sendImage = (token, idCard, faceImage) => {
+  const data = new FormData();
+
+  data.append("user_auths[id_card]", {
+      name: 'id_card.jpg',
+      type: 'image/jpg',
+      uri: Platform.OS === "android" ? idCard.uri : idCard.uri.replace("file://", "")
+    }
+  );
+
+  data.append("user_auths[face_image]", {
+      name: 'face_image.jpg',
+      type: 'image/jpg',
+      uri : Platform.OS === "android" ? faceImage.uri : faceImage.uri.replace("file://", "")
+    }
+  );
+  // data.append("user_auths[id_card]", {
+  //   name: idCard.fileName,
+  //   type: idCard.type,
+  //   uri:
+  //     Platform.OS === "android" ? idCard.uri : idCard.uri.replace("file://", "")
+  // });
+
+  // data.append("user_auths[face_image]", {
+  //   name: faceImage.fileName,
+  //   type: faceImage.type,
+  //   uri:
+  //     Platform.OS === "android" ? faceImage.uri : faceImage.uri.replace("file://", "")
+  // });
+
+  return privateAPI(token, POST, AUTH_ADULT, data);
+};
+
 
 // const privateAPI = (method: string, url: string, accessKey:string, secretKey:string) => {
 //   const payload = {

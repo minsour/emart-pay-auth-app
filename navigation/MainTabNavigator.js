@@ -4,6 +4,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
+import AboutScreen from '../screens/AboutScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -82,7 +83,7 @@ StoreStack.navigationOptions = {
 };
 
 const MyPageStack = createStackNavigator({
-  Home: HomeScreen,
+  About: AboutScreen,
 });
 
 MyPageStack.navigationOptions = {

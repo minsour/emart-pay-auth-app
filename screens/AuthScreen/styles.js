@@ -21,5 +21,17 @@ export default StyleSheet.create({
   },
   buttonFont: {
     color: 'white'
-  }
+  },
+  notButton: {
+    backgroundColor: "#d5d5d5",
+    borderRadius: 15,
+    width: DIMENSIONS_WIDTH - 80,
+    height: 55,
+    marginTop: -20,
+    marginBottom:-3,
+    justifyContent: 'center'
+  },
+  notButtonFont: {
+    color: "grey"
+  },
 });

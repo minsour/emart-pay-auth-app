@@ -5,8 +5,9 @@ import UploadImage from '../../components/UploadImage';
 import styles from './styles';
 import CameraComponent from '../../components/Camera';
 import { inject, observer } from 'mobx-react';
+import { sendImage } from '../../apis';
 
-@inject('cameraStore')
+@inject('cameraStore', 'userStore')
 @observer
 export default class AuthScreen extends React.Component {
   componentDidMount() {
@@ -32,6 +33,14 @@ export default class AuthScreen extends React.Component {
   
   leftButton = () => this.props.navigation.pop()
 
+  transferImages = async () => {
+    await sendImage(this.props.userStore.token, 
+      this.props.cameraStore.photo['idCard'], 
+      this.props.cameraStore.photo['faceImage'])
+      .then(response=>console.log(response));
+    this.props.navigation.navigate('Main');
+  }
+
   render() {
     if(this.props.cameraStore.camera['idCard']) {
       return(
@@ -50,9 +59,15 @@ export default class AuthScreen extends React.Component {
             <UploadImage title='실물사진' label='faceImage'/>
           </View>
           <View style={styles.buttonContainer}>
-            <Button style={styles.button}>
+          {this.props.cameraStore.photo['idCard'] !== '' && 
+           this.props.cameraStore.photo['faceImage'] !== '' ?
+            <Button style={styles.button} onPress={this.transferImages}>
               <Text style={styles.buttonFont}>전송</Text>
+            </Button> :
+            <Button style={styles.notButton}>
+              <Text style={styles.notButtonFont}>전송</Text>
             </Button>
+          }
           </View>
         </View>
     );

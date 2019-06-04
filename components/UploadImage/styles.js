@@ -21,8 +21,8 @@ export default StyleSheet.create({
     flex: 1
   },
   photo: {
-    width: 100,
-    height: 100,
+    width: '100%',
+    height: '300%',
     // position: 'absolute',
     // right: 0,
     // bottom: 0,

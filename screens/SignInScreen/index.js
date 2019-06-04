@@ -6,7 +6,7 @@ import { observable, action } from 'mobx';
 import { observer, inject} from 'mobx-react';
 import { signIn } from '../../apis';
 
-@inject('clickEventStore', 'navigateStore')
+@inject('clickEventStore', 'navigateStore', 'userStore')
 @observer
 class SignInScreen extends React.Component {
   // @observable name = '';
@@ -77,6 +77,7 @@ class SignInScreen extends React.Component {
         else if(result.token)
           this.props.navigateStore.login = true;
           console.log('click')
+          this.props.userStore.token = result.token;
       })
   }
 }
