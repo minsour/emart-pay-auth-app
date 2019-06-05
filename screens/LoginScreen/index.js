@@ -6,6 +6,8 @@ import { action } from 'mobx';
 import { observer, inject} from 'mobx-react';
 import SignInScreen from "../SignInScreen";
 import SignUpScreen from "../SignUpScreen";
+import { LoadingComponent } from "../../components/LoadingComponent";
+import { Loading } from "../../components/Loading";
 
 const logoPath = require("../../assets/images/logo.png");
 

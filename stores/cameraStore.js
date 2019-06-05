@@ -10,6 +10,10 @@ class CameraStore {
     'faceImage': false
   };
 
+  @action clearPhoto = (key) => {
+    this.photo[key] = '';
+  }
+
   @action showCamera = (key) => {
     this.camera[key] = true;
   };

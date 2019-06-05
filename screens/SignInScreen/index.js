@@ -72,12 +72,14 @@ class SignInScreen extends React.Component {
     signIn(this.email, this.password)
       .then(result => {
         console.log(result)
-        if(result.error == 'unauthorized')
+        if(result.error == 'unauthorized') {
           this.props.clickEventStore.signIn = true;
-        else if(result.token)
+        }
+        else if(result.token) {
           this.props.navigateStore.login = true;
           console.log('click')
           this.props.userStore.token = result.token;
+        }
       })
   }
 }

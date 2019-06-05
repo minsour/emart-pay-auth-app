@@ -4,12 +4,15 @@ import { createAppContainer, createSwitchNavigator, createStackNavigator } from 
 import MainTabNavigator from './MainTabNavigator';
 import LoginNavigator from './LoginNavigator';
 import AuthScreen from '../screens/AuthScreen';
+import MainScreen from '../screens/MainScreen';
+import FingerPrintScreen from '../components/FingerPrintComponent';
 
 const InitialNavigator = createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
   Login: LoginNavigator,
-  Main: MainTabNavigator,
+  //FingerPrint: FingerPrintScreen,
+  Main: MainScreen,
 });
 
 const QrPayNavigator = createStackNavigator({

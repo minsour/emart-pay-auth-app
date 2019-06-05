@@ -45,27 +45,6 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <ImageBackground source={require('../assets/images/main.jpeg')} style={{width: '100%', height: '100%'}}>
         </ImageBackground>
-        <Dialog
-          visible={this.props.clickEventStore.auth}
-          onDismiss={() => {this.props.clickEventStore.auth = false}}>
-          <Dialog.Title>사용자 인증을 먼저 해주시기 바랍니다.</Dialog.Title>
-          <Dialog.Content>
-            <Paragraph>인증을 먼저 진행하시겠습니까?</Paragraph>
-          </Dialog.Content>
-          <Dialog.Actions>
-            <Button style={{ marginRight: 15 }} onPress={() => {
-              this.props.clickEventStore.auth=false;
-            }}>
-              <Text>취소</Text>
-            </Button>
-            <Button style={{ marginRight: 10 }} onPress={() => {
-              this.props.clickEventStore.auth=false;
-              this.props.navigation.navigate('Auth');
-            }}>
-              <Text>확인</Text>
-            </Button>
-          </Dialog.Actions>
-        </Dialog>
       </View>
     );
   }
