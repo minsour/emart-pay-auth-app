@@ -5,6 +5,7 @@ class ClickEventStore {
   @observable signIn = false;
   @observable auth = false;
   @observable loginSwitch = true;
+  @observable qrCamera = false;
   @observable visible = {
     'transfer': false,
   }

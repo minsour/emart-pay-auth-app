@@ -79,6 +79,8 @@ class SignInScreen extends React.Component {
           this.props.navigateStore.login = true;
           console.log('click')
           this.props.userStore.token = result.token;
+          console.log(result.token)
+          console.log(this.props.userStore.token)
         }
       })
   }

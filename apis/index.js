@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_UP, AUTH_ADULT,  } from '../constants/apiUrl';
+import { SIGN_IN, SIGN_UP, AUTH_ADULT, GET_USER, PAY,  } from '../constants/apiUrl';
 import { GET, POST } from '../constants/apiMethod';
 import { Platform } from 'expo-core';
 
@@ -93,6 +93,16 @@ export const signIn = (email, password) => {
   return publicAPI(POST, SIGN_IN, {email: email, password: password});
 };
 
+export const pay = (token) => {
+  return fetch(PAY, { 
+    method: GET,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    } 
+  }).then((response) => response.json())
+};
+
 export const signUp = (name, userName, email, password, passwordConfirmation) => {
   return publicAPI(POST, SIGN_UP, {
     name: name,
@@ -101,6 +111,16 @@ export const signUp = (name, userName, email, password, passwordConfirmation) =>
     password: password,
     password_confirmation: passwordConfirmation});
 };
+
+export const getUser = (token) => {
+  return fetch(GET_USER, { 
+    method: GET,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token
+    } 
+  }).then((response) => response.json())
+}
 
 // export const getERCToken = () => {
 //   return publicAPI(GET, GET_UPBIT_ERC_URL)

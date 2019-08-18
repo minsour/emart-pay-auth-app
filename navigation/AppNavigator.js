@@ -6,6 +6,7 @@ import LoginNavigator from './LoginNavigator';
 import AuthScreen from '../screens/AuthScreen';
 import MainScreen from '../screens/MainScreen';
 import FingerPrintScreen from '../components/FingerPrintComponent';
+import QrPayScreen from '../screens/QrPayScreen';
 
 const InitialNavigator = createSwitchNavigator({
   // You could add another route here for authentication.
@@ -15,17 +16,22 @@ const InitialNavigator = createSwitchNavigator({
   Main: MainScreen,
 });
 
-const QrPayNavigator = createStackNavigator({
+const AuthNavigator = createStackNavigator({
+  AuthScreen: AuthScreen,
+});
+
+const QrPayNavigator = createSwitchNavigator({
   // You could add another route here for authentication.
   // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Auth: AuthScreen
+  Auth: AuthNavigator,
+  QrPay: QrPayScreen
 });
 
 export default createAppContainer(createStackNavigator({
     // You could add another route here for authentication.
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     Initial: InitialNavigator,
-    QrPay: QrPayNavigator
+    QrPayNavigator: QrPayNavigator
   },
   {
     headerMode: 'none'

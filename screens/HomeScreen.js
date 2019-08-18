@@ -11,13 +11,16 @@ import {
 } from 'react-native';
 import { Dialog, Paragraph, Button } from 'react-native-paper';
 import { inject, observer } from 'mobx-react';
+import { getUser } from '../apis';
 
-@inject('clickEventStore', 'navigateStore')
+@inject('clickEventStore', 'navigateStore', 'userStore')
 @observer
 export default class HomeScreen extends React.Component {
   componentDidMount() {
     this.props.navigation.setParams({
-        openDialog: this.openDialog
+        openDialog: this.openDialog,
+        openQrCamera: this.openQrCamera,
+        isAuth: this.isAuth
     });
   }
   static navigationOptions = ({navigation}) => ({
@@ -29,7 +32,7 @@ export default class HomeScreen extends React.Component {
     ),
     headerRight: (
       <TouchableOpacity 
-        onPress={() => navigation.state.params.openDialog()}>
+        onPress={() => navigation.state.params.isAuth()}>
         <Image
           source={require('../assets/images/QRpay.png')}
           style={{width: 38, height: 33, marginRight: 10}}
@@ -37,6 +40,19 @@ export default class HomeScreen extends React.Component {
       </TouchableOpacity> 
     )
   });
+
+  isAuth = async () => {
+    await getUser(this.props.userStore.token).then(result => {
+      result.current_user.auth ?
+      this.openQrCamera() :
+      this.openDialog();
+    })
+  }
+
+  openQrCamera = () => {
+    this.props.navigateStore.qr = true;
+  }
+
   openDialog = () => {
     this.props.clickEventStore.auth = true;
   }
